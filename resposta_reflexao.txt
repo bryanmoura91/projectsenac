@@ -1,0 +1,14 @@
+CBV (Class-Based Views) deixam o código mais organizado e reaproveitável, principalmente em projetos maiores.
+FBV (Function-Based Views) são mais simples de entender e boas pra coisas rápidas.
+Eu usaria CBV quando a view for mais estruturada, ou precisar herdar funcionalidades. Usaria FBV quando for algo bem direto e curto.
+
+
+
+Separar views e templates é importante porque deixa o código mais limpo e fácil de manter.
+Assim, quem cuida da lógica não precisa se preocupar com HTML, e quem cuida do HTML não precisa entender a lógica por trás.
+
+
+
+Um model bem feito ajuda a evitar erros nos dados e facilita as buscas e filtros.
+Se os models forem mal estruturados, o projeto pode ficar bagunçado, difícil de manter e dar erro no futuro com dados inconsistentes.
+
