@@ -16,4 +16,7 @@ urlpatterns = [
     # Parte 2 - rotas para formulário Person
     path('person/create/', views.PersonCreateView.as_view(), name='person_create'),
     path('person/edit/<int:pk>/', views.PersonUpdateView.as_view(), name='person_edit'),
+
+    # Parte 3 - formulário manual de feedback
+    path('feedback/', views.feedback_view, name='feedback'),
 ]

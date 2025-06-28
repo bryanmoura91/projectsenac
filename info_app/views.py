@@ -2,15 +2,18 @@ from django.http import JsonResponse
 from django.utils.timezone import now
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
+from django.shortcuts import render
 from .models import Person
-from .forms import PersonForm
+from .forms import PersonForm, FeedbackForm
 
-# --- CBVs para formulário ---
+
+
 class PersonCreateView(CreateView):
     model = Person
     form_class = PersonForm
     template_name = 'person_form.html'
-    success_url = reverse_lazy('person_list')  # ou qualquer rota de listagem que você tenha
+    success_url = reverse_lazy('person_list')
+
 
 class PersonUpdateView(UpdateView):
     model = Person
@@ -18,16 +21,37 @@ class PersonUpdateView(UpdateView):
     template_name = 'person_form.html'
     success_url = reverse_lazy('person_list')
 
-# --- Suas views API antigas ---
+
+
+def feedback_view(request):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            nome = form.cleaned_data['nome']
+            satisfacao = form.cleaned_data['satisfacao']
+            return render(request, 'agradecimento.html', {
+                'nome': nome,
+                'satisfacao': satisfacao
+            })
+    else:
+        form = FeedbackForm()
+
+    return render(request, 'feedback.html', {'form': form})
+
+
+
 def welcome_view(request):
     return JsonResponse({"message": "Welcome to the Personal Info API!"})
+
 
 def goodbye_view(request):
     return JsonResponse({"message": "Goodbye, see you next time!"})
 
+
 def current_time_view(request):
     current_time = now().strftime("%H:%M:%S")
     return JsonResponse({"current_time": current_time})
+
 
 def greet_view(request):
     name = request.GET.get('name')
@@ -36,6 +60,7 @@ def greet_view(request):
     else:
         message = "Hello, Stranger!"
     return JsonResponse({"message": message})
+
 
 def age_category_view(request):
     age = request.GET.get('age')
@@ -57,6 +82,7 @@ def age_category_view(request):
     else:
         category = "Senior"
     return JsonResponse({"category": category})
+
 
 def sum_view(request, num1, num2):
     try:

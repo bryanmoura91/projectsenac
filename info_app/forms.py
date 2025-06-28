@@ -1,6 +1,7 @@
 from django import forms
 from .models import Person
 
+# --- Formulário para o model Person
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
@@ -19,3 +20,17 @@ class PersonForm(forms.ModelForm):
         if age > 150:
             raise forms.ValidationError("Idade máxima permitida é 150 anos.")
         return age
+
+# --- Formulário manual para feedback
+class FeedbackForm(forms.Form):
+    SATISFACTION_CHOICES = [
+        ('Excelente', 'Excelente'),
+        ('Bom', 'Bom'),
+        ('Regular', 'Regular'),
+        ('Ruim', 'Ruim'),
+    ]
+
+    nome = forms.CharField(label='Nome', max_length=100)
+    email = forms.EmailField(label='E-mail')
+    comentario = forms.CharField(label='Comentário', widget=forms.Textarea)
+    satisfacao = forms.ChoiceField(label='Satisfação', choices=SATISFACTION_CHOICES)
