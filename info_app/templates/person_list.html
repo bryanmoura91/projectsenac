@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Pessoas</title>
+</head>
+<body>
+    <h1>Lista de Pessoas</h1>
+
+    <p>Filtrar por gênero:</p>
+    <ul>
+        <li><a href="{% url 'person_list' %}?gender=male">Masculino</a></li>
+        <li><a href="{% url 'person_list' %}?gender=female">Feminino</a></li>
+        <li><a href="{% url 'person_list' %}?gender=other">Outro</a></li>
+        <li><a href="{% url 'person_list' %}">Mostrar todos</a></li>
+    </ul>
+
+    <ul>
+        {% for person in persons %}
+            <li>{{ person.name }} - {{ person.age }} anos - {{ person.get_gender_display }}</li>
+        {% empty %}
+            <li>Nenhuma pessoa encontrada.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

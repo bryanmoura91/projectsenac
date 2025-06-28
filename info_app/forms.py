@@ -5,7 +5,7 @@ from .models import Person
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ['name', 'age']
+        fields = ['name', 'age', 'gender']  # Adicionado o campo 'gender'
 
     def clean_name(self):
         name = self.cleaned_data['name']

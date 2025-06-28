@@ -5,7 +5,7 @@ from info_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # Parte 1 - rotas simples
+    # Rotas API simples
     path('welcome', views.welcome_view),
     path('goodbye', views.goodbye_view),
     path('current-time', views.current_time_view),
@@ -13,10 +13,10 @@ urlpatterns = [
     path('age-category', views.age_category_view),
     path('sum/<str:num1>/<str:num2>', views.sum_view),
 
-    # Parte 2 - rotas para formulário Person
+    # Rotas para formulário Person
     path('person/create/', views.PersonCreateView.as_view(), name='person_create'),
     path('person/edit/<int:pk>/', views.PersonUpdateView.as_view(), name='person_edit'),
 
-    # Parte 3 - formulário manual de feedback
-    path('feedback/', views.feedback_view, name='feedback'),
+    # Rota para listar pessoas com filtro opcional por gênero
+    path('person/', views.PersonListView.as_view(), name='person_list'),
 ]
