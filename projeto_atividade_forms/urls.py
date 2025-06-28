@@ -12,4 +12,8 @@ urlpatterns = [
     path('greet', views.greet_view),
     path('age-category', views.age_category_view),
     path('sum/<str:num1>/<str:num2>', views.sum_view),
+
+    # Parte 2 - rotas para formulário Person
+    path('person/create/', views.PersonCreateView.as_view(), name='person_create'),
+    path('person/edit/<int:pk>/', views.PersonUpdateView.as_view(), name='person_edit'),
 ]

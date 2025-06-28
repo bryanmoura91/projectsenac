@@ -1,6 +1,24 @@
 from django.http import JsonResponse
 from django.utils.timezone import now
+from django.views.generic.edit import CreateView, UpdateView
+from django.urls import reverse_lazy
+from .models import Person
+from .forms import PersonForm
 
+# --- CBVs para formulário ---
+class PersonCreateView(CreateView):
+    model = Person
+    form_class = PersonForm
+    template_name = 'person_form.html'
+    success_url = reverse_lazy('person_list')  # ou qualquer rota de listagem que você tenha
+
+class PersonUpdateView(UpdateView):
+    model = Person
+    form_class = PersonForm
+    template_name = 'person_form.html'
+    success_url = reverse_lazy('person_list')
+
+# --- Suas views API antigas ---
 def welcome_view(request):
     return JsonResponse({"message": "Welcome to the Personal Info API!"})
 

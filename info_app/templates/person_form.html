@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if object %}Editar{% else %}Nova{% endif %} Pessoa</title>
+</head>
+<body>
+
+    <h1>{% if object %}Editar{% else %}Cadastrar{% endif %} Pessoa</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div style="margin-bottom: 10px;">
+                <label>{{ field.label_tag }}</label><br>
+                {{ field }}
+                {% if field.errors %}
+                    <div style="color: red;">
+                        {{ field.errors|striptags }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit">Salvar</button>
+    </form>
+
+</body>
+</html>
