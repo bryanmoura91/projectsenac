@@ -1,0 +1,27 @@
+TUDO O QUE FOI FEITO NO SUPABASE ATIVIDADE BANCO DE DADOS PARTE1
+
+-- Inserção de 2 novos contatos
+INSERT INTO public."info_app_person" (name, age, gender)
+VALUES
+    ('Lucas', 25, 'male'),
+    ('Laura', 30, 'female');
+
+-- Consulta: contatos cujo nome contém a letra "L"
+SELECT * FROM public."info_app_person"
+WHERE name ILIKE '%l%';
+
+-- Atualização: mudar idade de Lucas para 26
+UPDATE public."info_app_person"
+SET age = 26
+WHERE name = 'Lucas';
+
+-- Exclusão: remover Laura do banco
+DELETE FROM public."info_app_person"
+WHERE name = 'Laura';
+
+-- Ranking: nomes mais frequentes entre os contatos
+SELECT name, COUNT(*) AS total
+FROM public."info_app_person"
+GROUP BY name
+ORDER BY total DESC;
+
