@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8" />
+    <title>Lista de Logs de Contato</title>
 </head>
 <body>
-$END$
+    <h1>Logs de Contato</h1>
+
+    <ul>
+        {% for log in logs %}
+            <li><strong>{{ log.person.name }}</strong> - {{ log.timestamp|date:"d/m/Y H:i" }}<br>
+                {{ log.message }}
+            </li>
+        {% empty %}
+            <li>Nenhum log registrado.</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

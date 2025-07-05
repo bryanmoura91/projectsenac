@@ -1,11 +1,11 @@
 from django import forms
-from .models import Person
+from .models import Person, ContactLog
 
-# --- Formulário para o model Person
+
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ['name', 'age', 'gender']  # Adicionado o campo 'gender'
+        fields = ['name', 'age', 'gender']
 
     def clean_name(self):
         name = self.cleaned_data['name']
@@ -21,7 +21,7 @@ class PersonForm(forms.ModelForm):
             raise forms.ValidationError("Idade máxima permitida é 150 anos.")
         return age
 
-# --- Formulário manual para feedback
+
 class FeedbackForm(forms.Form):
     SATISFACTION_CHOICES = [
         ('Excelente', 'Excelente'),
@@ -34,3 +34,9 @@ class FeedbackForm(forms.Form):
     email = forms.EmailField(label='E-mail')
     comentario = forms.CharField(label='Comentário', widget=forms.Textarea)
     satisfacao = forms.ChoiceField(label='Satisfação', choices=SATISFACTION_CHOICES)
+
+
+class ContactLogForm(forms.ModelForm):
+    class Meta:
+        model = ContactLog
+        fields = ['person', 'message']

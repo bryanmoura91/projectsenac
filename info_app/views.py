@@ -3,22 +3,22 @@ from django.utils.timezone import now
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
-from .models import Person
-from .forms import PersonForm
+from .models import Person, ContactLog
+from .forms import PersonForm, ContactLogForm
 
-# --- CBVs para formulário ---
+# --- CBVs para formulário Person ---
 
 class PersonCreateView(CreateView):
     model = Person
     form_class = PersonForm
     template_name = 'person_form.html'
-    success_url = reverse_lazy('person_list')  # redireciona para lista após criar
+    success_url = reverse_lazy('person_list')
 
 class PersonUpdateView(UpdateView):
     model = Person
     form_class = PersonForm
     template_name = 'person_form.html'
-    success_url = reverse_lazy('person_list')  # redireciona para lista após editar
+    success_url = reverse_lazy('person_list')
 
 class PersonListView(ListView):
     model = Person
@@ -32,7 +32,21 @@ class PersonListView(ListView):
             queryset = queryset.filter(gender=gender)
         return queryset
 
-# --- Suas views API antigas ---
+# --- CBVs para ContactLog ---
+
+class ContactLogCreateView(CreateView):
+    model = ContactLog
+    form_class = ContactLogForm
+    template_name = 'contactlog_form.html'
+    success_url = reverse_lazy('contactlog_list')
+
+class ContactLogListView(ListView):
+    model = ContactLog
+    template_name = 'contactlog_list.html'
+    context_object_name = 'logs'
+    ordering = ['-timestamp']
+
+
 
 def welcome_view(request):
     return JsonResponse({"message": "Welcome to the Personal Info API!"})

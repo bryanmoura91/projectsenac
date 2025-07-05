@@ -47,7 +47,53 @@ WHERE name = 'Laura';
 SELECT name, COUNT(*) AS total
 FROM public."info_app_person"
 GROUP BY name
-ORDER BY total DESC;]]></console>
+ORDER BY total DESC;
+
+-- --------------------------------------------------------------
+
+-- Consultar todas as mensagens registradas para o gênero 'female'
+SELECT
+    cl.id,
+    p.name AS pessoa,
+    p.gender,
+    cl.timestamp,
+    cl.message
+FROM
+    public."info_app_contactlog" cl
+JOIN
+    public."info_app_person" p ON cl.person_id = p.id
+WHERE
+    p.gender = 'female'
+ORDER BY
+    cl.timestamp DESC;
+
+-- --------------------------------------------------------------
+
+-- Contar quantos logs cada pessoa tem
+SELECT
+    p.name AS pessoa,
+    COUNT(cl.id) AS total_logs
+FROM
+    public."info_app_contactlog" cl
+JOIN
+    public."info_app_person" p ON cl.person_id = p.id
+GROUP BY
+    p.name
+ORDER BY
+    total_logs DESC;
+
+-- --------------------------------------------------------------
+
+-- Ranking dos primeiros nomes mais frequentes
+SELECT
+    SPLIT_PART(name, ' ', 1) AS primeiro_nome,
+    COUNT(*) AS quantidade
+FROM
+    public."info_app_person"
+GROUP BY
+    primeiro_nome
+ORDER BY
+    quantidade DESC;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">

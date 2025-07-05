@@ -16,7 +16,9 @@ urlpatterns = [
     # Rotas para formulário Person
     path('person/create/', views.PersonCreateView.as_view(), name='person_create'),
     path('person/edit/<int:pk>/', views.PersonUpdateView.as_view(), name='person_edit'),
-
-    # Rota para listar pessoas com filtro opcional por gênero
     path('person/', views.PersonListView.as_view(), name='person_list'),
+
+    # Rotas para ContactLog
+    path('contact-log/new/', views.ContactLogCreateView.as_view(), name='contactlog_new'),
+    path('contact-log/list/', views.ContactLogListView.as_view(), name='contactlog_list'),
 ]
